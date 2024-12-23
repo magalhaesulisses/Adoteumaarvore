@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="30dp"
+    tools:context=".RegisterActivity">
+    <TextView
+        android:id="@+id/txtRegisterReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/registrar"
+        android:textAlignment="center"
+        android:textColor="@color/midBrown"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+    <EditText
+        android:id="@+id/edtNomeReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Nome"
+        android:text="" />
+    <EditText
+        android:id="@+id/edtSobrenomeReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Sobrenome"
+        android:text="" />
+    <EditText
+        android:id="@+id/edtLoginReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Login"
+        android:text="" />
+    <EditText
+        android:id="@+id/edtDataNascimentoReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Data de Nascimento"
+        android:inputType="date" />
+    <EditText
+        android:id="@+id/edtEmailReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="E-mail"
+        android:text="" />
+    <EditText
+        android:id="@+id/edtFoneReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Celular"
+        android:inputType="phone" />
+    <EditText
+        android:id="@+id/edtSenhaReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Senha"
+        android:inputType="textPassword" />
+    <EditText
+        android:id="@+id/edtSenhaConfirmacaoReg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Confirme sua senha"
+        android:inputType="textPassword" />
+    <Button
+        android:id="@+id/btnRegisterReg"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/midGreen"
+        android:layout_height="wrap_content"
+        android:text="Registrar" />
+    <Button
+        android:id="@+id/btnLoginReg"
+        android:layout_width="match_parent"
+        android:backgroundTint="@color/baseGreen"
+        android:layout_height="wrap_content"
+        android:text="Login" />
+</LinearLayout>
