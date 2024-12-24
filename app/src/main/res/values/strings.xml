@@ -5,4 +5,20 @@
     <string name="login">Login</string>
     <string name="entrar">Entrar</string>
     <string name="registrar">Registrar</string>
+
+    <string name="nomereg">Nome</string>
+    <string name="sobrenomereg">Sobrenome</string>
+    <string name="datanascimentoreg">Data Nascimento</string>
+    <string name="loginreg">Login</string>
+    <string name="emailreg">E-mail</string>
+    <string name="fonereg">Celular</string>
+    <string name="senhareg">Senha</string>
+    <string name="senhaconfirmacaoreg">Confirme sua senha</string>
+    <string name="registrarreg">Registrar</string>
+
+
+    private String login;
+    private String email;
+    private String fone;
+    private String senha;
 </resources>

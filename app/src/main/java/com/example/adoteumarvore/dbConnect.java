@@ -10,7 +10,7 @@ public class dbConnect extends SQLiteOpenHelper {
 
     private static final String dbName = "adotearvore";
     private static final String dbTableUsers = "Usuarios";
-    private static int dbVersion = 1;
+    private static final int dbVersion = 1;
 
     public dbConnect(@Nullable Context context) {
         super(context, dbName, null, dbVersion);

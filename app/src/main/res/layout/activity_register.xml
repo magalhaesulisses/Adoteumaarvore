@@ -23,7 +23,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Nome"
+        android:autofillHints="nome"
+        android:hint="@string/nomereg"
+        android:height="48dp"
         android:text="" />
     <EditText
         android:id="@+id/edtSobrenomeReg"
@@ -31,7 +33,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Sobrenome"
+        android:hint="@string/sobrenomereg"
+        android:autofillHints="sobrenome"
+        android:height="48dp"
         android:text="" />
     <EditText
         android:id="@+id/edtLoginReg"
@@ -39,54 +43,66 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="Login"
+        android:hint="@string/loginreg"
+        android:autofillHints="login"
+        android:height="48dp"
         android:text="" />
     <EditText
         android:id="@+id/edtDataNascimentoReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Data de Nascimento"
+        android:hint="@string/datanascimentoreg"
+        android:autofillHints="datanascimento"
+        android:height="48dp"
         android:inputType="date" />
     <EditText
         android:id="@+id/edtEmailReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:hint="E-mail"
+        android:inputType="textEmailAddress"
+        android:autofillHints="email"
+        android:hint="@string/emailreg"
+        android:height="48dp"
         android:text="" />
     <EditText
         android:id="@+id/edtFoneReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Celular"
+        android:hint="@string/fonereg"
+        android:autofillHints="fone"
+        android:height="48dp"
         android:inputType="phone" />
     <EditText
         android:id="@+id/edtSenhaReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Senha"
+        android:hint="@string/senhareg"
+        android:autofillHints="senha"
+        android:height="48dp"
         android:inputType="textPassword" />
     <EditText
         android:id="@+id/edtSenhaConfirmacaoReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Confirme sua senha"
+        android:hint="@string/senhaconfirmacaoreg"
+        android:autofillHints="senhaconfirmacao"
+        android:height="48dp"
         android:inputType="textPassword" />
     <Button
         android:id="@+id/btnRegisterReg"
         android:layout_width="match_parent"
         android:backgroundTint="@color/midGreen"
         android:layout_height="wrap_content"
-        android:text="Registrar" />
+        android:text="@string/registrarreg" />
     <Button
         android:id="@+id/btnLoginReg"
         android:layout_width="match_parent"
         android:backgroundTint="@color/baseGreen"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="@string/loginreg" />
 </LinearLayout>
