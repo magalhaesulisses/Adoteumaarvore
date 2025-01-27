@@ -1,10 +1,13 @@
 <resources>
+
     <string name="app_name">Adote uma Árvore</string>
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
     <string name="login">Login</string>
+    <string name="email">E-mail</string>
     <string name="entrar">Entrar</string>
-    <string name="registrar">Registrar</string>
+    <string name="cadastrar">Cadastrar</string>
+    <string name="crieconta">Crie sua conta</string>
 
     <string name="nomereg">Nome</string>
     <string name="sobrenomereg">Sobrenome</string>
@@ -14,11 +17,23 @@
     <string name="fonereg">Celular</string>
     <string name="senhareg">Senha</string>
     <string name="senhaconfirmacaoreg">Confirme sua senha</string>
-    <string name="registrarreg">Registrar</string>
+    <string name="cadastrarreg">Cadastrar</string>
+    <string name="entrarreg">Já possui uma conta? Entrar</string>
 
+    <string name="title_activity_profile">Inicio</string>
 
-    private String login;
-    private String email;
-    private String fone;
-    private String senha;
+    <string name="navigation_drawer_open">Abrir navegação</string>
+    <string name="navigation_drawer_close">Fechar navegação</string>
+
+    <string name="nav_header_title">Adote uma árvore</string>
+    <string name="nav_header_subtitle">Arborizando a cidade juntos!</string>
+
+    <string name="nav_header_desc">Cabeçalho Navegação</string>
+    <string name="action_settings">Configurações</string>
+
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_newPlant">Novo Plantio</string>
+    <string name="menu_nativeSpecies">Espécies Nativas</string>
+    <string name="menu_information">Informativos</string>
+
 </resources>

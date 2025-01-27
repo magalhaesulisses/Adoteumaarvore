@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "343079905354",
+    "project_id": "adoteumaarvore",
+    "storage_bucket": "adoteuma-arvore.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:343079905354:android:30fcbf851b1f07e4f91eb3",
+        "android_client_info": {
+          "package_name": "com.example.adoteumaarvore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYtxTvO37bVR8OW2wD3rR1p7p4ZnYAaLY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,23 +1,40 @@
-package com.example.adoteumarvore;
+package com.example.adoteumaarvore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class RegisterActivity extends AppCompatActivity {
-    EditText edtNomeReg, edtSobrenomeReg, edtDataNascimentoReg, edtLoginReg,
-             edtEmailReg, edtFoneReg, edtSenhaReg, edtSenhaConfirmacaoReg;
+import com.example.adoteumaarvore.R;
+import com.example.adoteumaarvore.config.ConfigFirebase;
+import com.example.adoteumaarvore.model.Usuario;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-    Button btnLoginReg, btnRegisterReg;
+
+public class RegisterActivity extends AppCompatActivity {
+    private EditText edtNomeReg, edtSobrenomeReg, edtDataNascimentoReg, edtLoginReg,
+             edtEmailReg, edtFoneReg, edtSenhaReg, edtSenhaConfirmacaoReg;
+    private Button  btnRegisterReg;
+    private TextView txtEntrarReg;
+    private FirebaseAuth auth;
+    private Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
+        //References
         edtNomeReg              = findViewById(R.id.edtNomeReg);
         edtSobrenomeReg         = findViewById(R.id.edtSobrenomeReg);
         edtDataNascimentoReg    = findViewById(R.id.edtDataNascimentoReg);
@@ -39,11 +57,10 @@ public class RegisterActivity extends AppCompatActivity {
         edtFoneReg              = findViewById(R.id.edtFoneReg);
         edtSenhaReg             = findViewById(R.id.edtSenhaReg);
         edtSenhaConfirmacaoReg  = findViewById(R.id.edtSenhaConfirmacaoReg);
-
-        btnLoginReg             = findViewById(R.id.btnLoginReg);
         btnRegisterReg          = findViewById(R.id.btnRegisterReg);
+        txtEntrarReg            = findViewById(R.id.txtEntrarReg);
 
-        btnLoginReg.setOnClickListener(new View.OnClickListener() {
+        txtEntrarReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(RegisterActivity.this, MainActivity.class);
@@ -52,7 +69,9 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         btnRegisterReg.setOnClickListener(new View.OnClickListener() {
+
             private int validateCampos(){
+                //Strings
                 String strNome              = edtNomeReg.getText().toString();
                 String strSobrenome         = edtSobrenomeReg.getText().toString();
                 String strDataNascimento    = edtDataNascimentoReg.getText().toString();
@@ -100,13 +119,55 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else
                     return 1;
-            };
+            }
+
+            public void cadastarUsuario(){
+                auth = ConfigFirebase.getFirebaseAuth();
+                auth.createUserWithEmailAndPassword(user.getEmail(), user.getSenha()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()){
+                            Toast.makeText(RegisterActivity.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(i);
+                        }else{
+                            String excpt;
+                            try {
+                                throw task.getException();
+                            } catch (FirebaseAuthWeakPasswordException e){
+                                excpt = "Senha deve conter letras e números!";
+                            } catch (FirebaseAuthInvalidCredentialsException e){
+                                excpt = "Digite um e-mail válido!";
+                            } catch (FirebaseAuthUserCollisionException e){
+                                excpt = "E-mail já cadastrado!";
+                            } catch (Exception e) {
+                                excpt = "Ocorreu um erro ao realizar o cadastro: " + e.getMessage();
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(RegisterActivity.this, excpt, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+
             @Override
             public void onClick(View v) {
                 if (validateCampos() == 1){
-                    //
+
+                    //Create new User Instance
+                    user = new Usuario();
+                    user.setNome(edtNomeReg.getText().toString());
+                    user.setSobrenome(edtSobrenomeReg.getText().toString());
+                    //user.setDatanascimento(edtDataNascimentoReg);
+                    user.setLogin(edtLoginReg.getText().toString());
+                    user.setEmail(edtEmailReg.getText().toString());
+                    user.setFone(edtFoneReg.getText().toString());
+                    user.setSenha(edtSenhaReg.getText().toString());
+
+                    cadastarUsuario();
                 }
             }
         });
+
     }
 }

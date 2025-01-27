@@ -1,4 +1,4 @@
-package com.example.adoteumarvore;
+package com.example.adoteumaarvore.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,13 +6,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
-public class dbConnect extends SQLiteOpenHelper {
+import com.example.adoteumaarvore.model.Usuario;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String dbName = "adotearvore";
     private static final String dbTableUsers = "Usuarios";
     private static final int dbVersion = 1;
 
-    public dbConnect(@Nullable Context context) {
+    public DatabaseHelper(@Nullable Context context) {
         super(context, dbName, null, dbVersion);
     }
 
@@ -37,7 +39,7 @@ public class dbConnect extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + dbTableUsers);
     }
 
-    public void addUsuario(Usuarios usuario){
+    public void addUsuario(Usuario usuario){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("nome", usuario.getNome());

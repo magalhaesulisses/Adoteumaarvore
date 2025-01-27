@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_profile">
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.adoteumaarvore.activity.ui.profile.ProfileFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/nav_newPlant"
+        android:name="com.example.adoteumaarvore.activity.ui.newplant.NewPlantFragment"
+        android:label="@string/menu_newPlant"
+        tools:layout="@layout/fragment_newplant" />
+
+    <fragment
+        android:id="@+id/nav_nativeSpecies"
+        android:name="com.example.adoteumaarvore.activity.ui.nativespecies.NativespeciesFragment"
+        android:label="@string/menu_nativeSpecies"
+        tools:layout="@layout/fragment_nativespecies" />
+
+    <fragment
+        android:id="@+id/nav_information"
+        android:name="com.example.adoteumaarvore.activity.ui.information.InformationFragment"
+        android:label="@string/menu_information"
+        tools:layout="@layout/fragment_information" />
+</navigation>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/baseline_person_24"
+            android:title="@string/menu_profile"/>
+        <item
+            android:id="@+id/nav_newPlant"
+            android:icon="@drawable/ic_menu_plus"
+            android:title="@string/menu_newPlant"/>
+        <item
+            android:id="@+id/nav_nativeSpecies"
+            android:icon="@drawable/ic_menu_nativespecies"
+            android:title="@string/menu_nativeSpecies" />
+        <item
+            android:id="@+id/nav_information"
+            android:icon="@drawable/ic_menu_snow"
+            android:title="@string/menu_information" />
+    </group>
+</menu>

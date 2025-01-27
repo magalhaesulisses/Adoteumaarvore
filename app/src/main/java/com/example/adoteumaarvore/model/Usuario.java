@@ -1,8 +1,8 @@
-package com.example.adoteumarvore;
+package com.example.adoteumaarvore.model;
 
 import java.util.Date;
 
-public class Usuarios {
+public class Usuario {
     private int id;
     private String nome;
     private String sobrenome;
@@ -12,15 +12,8 @@ public class Usuarios {
     private String fone;
     private String senha;
 
-    public Usuarios(int id, String nome, String sobrenome, String login, Date datanascimento, String email, String fone, String senha) {
-        this.id = id;
-        this.nome = nome;
-        this.sobrenome = sobrenome;
-        this.login = login;
-        this.datanascimento = datanascimento;
-        this.email = email;
-        this.fone = fone;
-        this.senha = senha;
+    public Usuario() {
+
     }
 
     public int getId() {

@@ -8,7 +8,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -36,22 +36,22 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/username"
+                android:id="@+id/useremail"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="40dp"
                 android:autofillHints="username"
                 android:background="@drawable/custom_edittext"
-                android:drawableLeft="@drawable/baseline_person_24"
+                android:drawableLeft="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:hint="@string/usuario"
-                android:inputType="text"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:padding="8dp"
                 android:textColor="@color/black"
                 android:textColorHighlight="@color/cardview_dark_background" />
 
             <EditText
-                android:id="@+id/password"
+                android:id="@+id/userpassword"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:backgroundTint="@color/midBrown"
-                android:text="@string/registrar"
+                android:text="@string/cadastrar"
                 android:textSize="18sp"
                 app:cornerRadius="20dp" />
 

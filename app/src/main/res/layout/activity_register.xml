@@ -4,105 +4,122 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
     android:layout_margin="30dp"
-    tools:context=".RegisterActivity">
+    android:orientation="vertical"
+    android:title="@string/crieconta"
+    tools:context=".activity.RegisterActivity">
+
     <TextView
         android:id="@+id/txtRegisterReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registrar"
+        android:padding="10dp"
+        android:text="@string/crieconta"
         android:textAlignment="center"
         android:textColor="@color/midBrown"
         android:textSize="24sp"
         android:textStyle="bold" />
+
     <EditText
         android:id="@+id/edtNomeReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:autofillHints="nome"
+        android:layout_height="50dp"
+        android:autofillHints="name"
         android:hint="@string/nomereg"
-        android:height="48dp"
-        android:text="" />
+        android:inputType="text"
+        android:text=""
+        android:textColor="@color/darkBrown" />
+
     <EditText
         android:id="@+id/edtSobrenomeReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints=""
         android:ems="10"
-        android:inputType="text"
         android:hint="@string/sobrenomereg"
-        android:autofillHints="sobrenome"
-        android:height="48dp"
-        android:text="" />
+        android:inputType="text"
+        android:text=""
+        android:textColor="@color/darkBrown" />
+
     <EditText
         android:id="@+id/edtLoginReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="text"
-        android:hint="@string/loginreg"
+        android:layout_height="50dp"
         android:autofillHints="login"
-        android:height="48dp"
-        android:text="" />
+        android:ems="10"
+        android:hint="@string/loginreg"
+        android:inputType="text"
+        android:text=""
+        android:textColor="@color/darkBrown" />
+
     <EditText
         android:id="@+id/edtDataNascimentoReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints="DD/MM/YYYYY"
         android:ems="10"
         android:hint="@string/datanascimentoreg"
-        android:autofillHints="datanascimento"
-        android:height="48dp"
+        android:textColor="@color/darkBrown"
         android:inputType="date" />
+
     <EditText
         android:id="@+id/edtEmailReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
+        android:layout_height="50dp"
         android:autofillHints="email"
+        android:ems="10"
         android:hint="@string/emailreg"
-        android:height="48dp"
+        android:textColor="@color/darkBrown"
+        android:inputType="textEmailAddress"
         android:text="" />
+
     <EditText
         android:id="@+id/edtFoneReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints="phone"
         android:ems="10"
         android:hint="@string/fonereg"
-        android:autofillHints="fone"
-        android:height="48dp"
+        android:textColor="@color/darkBrown"
         android:inputType="phone" />
+
     <EditText
         android:id="@+id/edtSenhaReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints="password"
         android:ems="10"
         android:hint="@string/senhareg"
-        android:autofillHints="senha"
-        android:height="48dp"
+        android:textColor="@color/darkBrown"
         android:inputType="textPassword" />
+
     <EditText
         android:id="@+id/edtSenhaConfirmacaoReg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:autofillHints="password"
         android:ems="10"
         android:hint="@string/senhaconfirmacaoreg"
-        android:autofillHints="senhaconfirmacao"
-        android:height="48dp"
+        android:textColor="@color/darkBrown"
         android:inputType="textPassword" />
+
     <Button
         android:id="@+id/btnRegisterReg"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:backgroundTint="@color/midGreen"
-        android:layout_height="wrap_content"
-        android:text="@string/registrarreg" />
-    <Button
-        android:id="@+id/btnLoginReg"
+        android:text="@string/cadastrarreg" />
+
+    <TextView
+        android:id="@+id/txtEntrarReg"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/baseGreen"
         android:layout_height="wrap_content"
-        android:text="@string/loginreg" />
+        android:height="30dp"
+        android:text="@string/entrarreg"
+        android:textColor="@color/darkBrown"
+        android:gravity="center"
+        />
+
 </LinearLayout>

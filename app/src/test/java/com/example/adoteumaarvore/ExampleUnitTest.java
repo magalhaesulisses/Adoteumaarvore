@@ -1,4 +1,4 @@
-package com.example.adoteumarvore;
+package com.example.adoteumaarvore;
 
 import org.junit.Test;
 
