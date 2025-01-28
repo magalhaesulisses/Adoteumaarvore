@@ -1,4 +1,4 @@
-package com.example.adoteumaarvore.activity;
+package com.example.tccadoteumaarvore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,9 +14,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.adoteumaarvore.R;
-import com.example.adoteumaarvore.config.ConfigFirebase;
-import com.example.adoteumaarvore.model.Usuario;
+import com.example.tccadoteumaarvore.R;
+import com.example.tccadoteumaarvore.config.ConfigFirebase;
+import com.example.tccadoteumaarvore.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

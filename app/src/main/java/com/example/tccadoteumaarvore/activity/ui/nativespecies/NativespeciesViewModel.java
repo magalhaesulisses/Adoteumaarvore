@@ -1,16 +1,16 @@
-package com.example.adoteumaarvore.activity.ui.newplant;
+package com.example.tccadoteumaarvore.activity.ui.nativespecies;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class NewPlantViewModel extends ViewModel {
+public class NativespeciesViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public NewPlantViewModel() {
+    public NativespeciesViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is newplant fragment");
+        mText.setValue("This is nativespecies fragment");
     }
 
     public LiveData<String> getText() {

@@ -1,4 +1,4 @@
-package com.example.adoteumaarvore.activity.ui.nativespecies;
+package com.example.tccadoteumaarvore.activity.ui.nativespecies;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.adoteumaarvore.databinding.FragmentNativespeciesBinding;
+import com.example.tccadoteumaarvore.databinding.FragmentNativespeciesBinding;
 
 public class NativespeciesFragment extends Fragment {
 

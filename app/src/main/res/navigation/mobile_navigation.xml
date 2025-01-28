@@ -7,25 +7,25 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.adoteumaarvore.activity.ui.profile.ProfileFragment"
+        android:name="com.example.tccadoteumaarvore.activity.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_newPlant"
-        android:name="com.example.adoteumaarvore.activity.ui.newplant.NewPlantFragment"
+        android:name="com.example.tccadoteumaarvore.activity.ui.newplant.NewPlantFragment"
         android:label="@string/menu_newPlant"
         tools:layout="@layout/fragment_newplant" />
 
     <fragment
         android:id="@+id/nav_nativeSpecies"
-        android:name="com.example.adoteumaarvore.activity.ui.nativespecies.NativespeciesFragment"
+        android:name="com.example.tccadoteumaarvore.activity.ui.nativespecies.NativespeciesFragment"
         android:label="@string/menu_nativeSpecies"
         tools:layout="@layout/fragment_nativespecies" />
 
     <fragment
         android:id="@+id/nav_information"
-        android:name="com.example.adoteumaarvore.activity.ui.information.InformationFragment"
+        android:name="com.example.tccadoteumaarvore.activity.ui.information.InformationFragment"
         android:label="@string/menu_information"
         tools:layout="@layout/fragment_information" />
 </navigation>

@@ -1,16 +1,15 @@
-package com.example.adoteumaarvore.activity.ui.newplant;
+package com.example.tccadoteumaarvore.activity.ui.newplant;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.adoteumaarvore.databinding.FragmentNewplantBinding;
+import com.example.tccadoteumaarvore.databinding.FragmentNewplantBinding;
 
 public class NewPlantFragment extends Fragment {
 
@@ -23,9 +22,6 @@ public class NewPlantFragment extends Fragment {
 
         binding = FragmentNewplantBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
-        final TextView textView = binding.textNewplant;
-        newplantViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

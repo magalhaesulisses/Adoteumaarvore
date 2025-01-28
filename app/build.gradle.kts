@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.adoteumaarvore"
+    namespace = "com.example.tccadoteumaarvore"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.adoteumaarvore"
+        applicationId = "com.example.tccadoteumaarvore"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -54,16 +54,6 @@
         android:textColor="@color/darkBrown" />
 
     <EditText
-        android:id="@+id/edtDataNascimentoReg"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:autofillHints="DD/MM/YYYYY"
-        android:ems="10"
-        android:hint="@string/datanascimentoreg"
-        android:textColor="@color/darkBrown"
-        android:inputType="date" />
-
-    <EditText
         android:id="@+id/edtEmailReg"
         android:layout_width="match_parent"
         android:layout_height="50dp"

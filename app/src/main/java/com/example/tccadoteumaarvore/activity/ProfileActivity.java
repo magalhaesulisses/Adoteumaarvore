@@ -1,11 +1,9 @@
-package com.example.adoteumaarvore.activity;
+package com.example.tccadoteumaarvore.activity;
 
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 
-import com.example.adoteumaarvore.R;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.tccadoteumaarvore.R;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -15,7 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.adoteumaarvore.databinding.ActivityProfileBinding;
+import com.example.tccadoteumaarvore.databinding.ActivityProfileBinding;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -30,14 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarProfile.toolbar);
-        binding.appBarProfile.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null)
-                        .setAnchorView(R.id.fab).show();
-            }
-        });
+        
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each

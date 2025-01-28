@@ -1,12 +1,14 @@
-package com.example.adoteumaarvore.model;
+package com.example.tccadoteumaarvore.model;
 
-import java.util.Date;
+import com.example.tccadoteumaarvore.config.ConfigFirebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 
 public class Usuario {
-    private int id;
+    private String uui;
     private String nome;
     private String sobrenome;
-    private Date datanascimento;
+    //private Date datanascimento;
     private String login;
     private String email;
     private String fone;
@@ -16,12 +18,18 @@ public class Usuario {
 
     }
 
-    public int getId() {
-        return id;
+    public void salvarUsuario(){
+        DatabaseReference reference = ConfigFirebase.getFirebaseRef();
+        reference.child("usuarios").child(this.uui).setValue(this);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Exclude
+    public String getUui() {
+        return uui;
+    }
+
+    public void setUui(String uui) {
+        this.uui = uui;
     }
 
     public String getNome() {
@@ -48,6 +56,7 @@ public class Usuario {
         this.login = login;
     }
 
+    /*
     public Date getDatanascimento() {
         return datanascimento;
     }
@@ -55,6 +64,7 @@ public class Usuario {
     public void setDatanascimento(Date datanascimento) {
         this.datanascimento = datanascimento;
     }
+     */
 
     public String getEmail() {
         return email;
@@ -72,6 +82,7 @@ public class Usuario {
         this.fone = fone;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }

@@ -1,4 +1,4 @@
-package com.example.adoteumaarvore.activity;
+package com.example.tccadoteumaarvore.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,21 +15,21 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.adoteumaarvore.R;
-import com.example.adoteumaarvore.config.ConfigFirebase;
-import com.example.adoteumaarvore.model.Usuario;
+import com.example.tccadoteumaarvore.R;
+import com.example.tccadoteumaarvore.config.ConfigFirebase;
+import com.example.tccadoteumaarvore.model.Usuario;
+import com.example.tccadoteumaarvore.utils.Base64Custom;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText edtNomeReg, edtSobrenomeReg, edtDataNascimentoReg, edtLoginReg,
+    private EditText edtNomeReg, edtSobrenomeReg, edtLoginReg,
              edtEmailReg, edtFoneReg, edtSenhaReg, edtSenhaConfirmacaoReg;
     private Button  btnRegisterReg;
     private TextView txtEntrarReg;
@@ -51,7 +51,6 @@ public class RegisterActivity extends AppCompatActivity {
         //References
         edtNomeReg              = findViewById(R.id.edtNomeReg);
         edtSobrenomeReg         = findViewById(R.id.edtSobrenomeReg);
-        edtDataNascimentoReg    = findViewById(R.id.edtDataNascimentoReg);
         edtLoginReg             = findViewById(R.id.edtLoginReg);
         edtEmailReg             = findViewById(R.id.edtEmailReg);
         edtFoneReg              = findViewById(R.id.edtFoneReg);
@@ -74,7 +73,6 @@ public class RegisterActivity extends AppCompatActivity {
                 //Strings
                 String strNome              = edtNomeReg.getText().toString();
                 String strSobrenome         = edtSobrenomeReg.getText().toString();
-                String strDataNascimento    = edtDataNascimentoReg.getText().toString();
                 String strLogin             = edtLoginReg.getText().toString();
                 String strEmail             = edtEmailReg.getText().toString();
                 String strFone              = edtFoneReg.getText().toString();
@@ -91,10 +89,6 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 if (strLogin.isEmpty()){
                     Toast.makeText(RegisterActivity.this, "Informe um login!", Toast.LENGTH_LONG).show();
-                    return 0;
-                }
-                if (strDataNascimento.isEmpty()){
-                    Toast.makeText(RegisterActivity.this, "Informe uma data de nascimento!", Toast.LENGTH_LONG).show();
                     return 0;
                 }
                 if (strEmail.isEmpty()){
@@ -123,10 +117,27 @@ public class RegisterActivity extends AppCompatActivity {
 
             public void cadastarUsuario(){
                 auth = ConfigFirebase.getFirebaseAuth();
+
+                //Create new User Instance
+                user = new Usuario();
+                user.setNome(edtNomeReg.getText().toString());
+                user.setSobrenome(edtSobrenomeReg.getText().toString());
+                user.setLogin(edtLoginReg.getText().toString());
+                user.setEmail(edtEmailReg.getText().toString());
+
+                //Uses e-mail to generate uui
+                user.setUui(Base64Custom.encodeBase64(user.getEmail()));
+
+                user.setFone(edtFoneReg.getText().toString());
+                user.setSenha(edtSenhaReg.getText().toString());
+
                 auth.createUserWithEmailAndPassword(user.getEmail(), user.getSenha()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+
+                            user.salvarUsuario();
+
                             Toast.makeText(RegisterActivity.this, "Sucesso ao cadastrar usuário", Toast.LENGTH_LONG).show();
                             Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(i);
@@ -153,17 +164,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validateCampos() == 1){
-
-                    //Create new User Instance
-                    user = new Usuario();
-                    user.setNome(edtNomeReg.getText().toString());
-                    user.setSobrenome(edtSobrenomeReg.getText().toString());
-                    //user.setDatanascimento(edtDataNascimentoReg);
-                    user.setLogin(edtLoginReg.getText().toString());
-                    user.setEmail(edtEmailReg.getText().toString());
-                    user.setFone(edtFoneReg.getText().toString());
-                    user.setSenha(edtSenhaReg.getText().toString());
-
                     cadastarUsuario();
                 }
             }

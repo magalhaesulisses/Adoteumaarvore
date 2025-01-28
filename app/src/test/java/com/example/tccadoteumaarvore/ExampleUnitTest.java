@@ -1,4 +1,4 @@
-package com.example.adoteumaarvore;
+package com.example.tccadoteumaarvore;
 
 import org.junit.Test;
 

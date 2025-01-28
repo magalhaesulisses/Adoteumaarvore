@@ -6,17 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".activity.ui.newplant.NewPlantFragment">
 
-    <TextView
-        android:id="@+id/text_newplant"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_newplant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/newPlant_Plant"
+            android:textAlignment="viewStart"
+            android:textSize="34sp" />
+
+        <AutoCompleteTextView
+            android:id="@+id/newSpecies_edtSpecies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:height="60dp"
+            android:text="@string/newPlant_Species"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/newSpecies_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="@string/newPlant_Nick"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/newSpecies_edtMutiple"
+            android:layout_width="match_parent"
+            android:layout_height="222dp"
+            android:layout_margin="10dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:text="@string/newPlant_Share"
+            android:textSize="20sp" />
+
+        <ImageButton
+            android:id="@+id/newSpecies_imgButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_menu_gallery" />
+
+        <Button
+            android:id="@+id/newSpecies_btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBrown"
+            android:text="@string/newPlant_OK" />
+
+        <Button
+            android:id="@+id/newSpecies_btnBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/midBrown"
+            android:text="@string/newPlant_Back" />
+
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
