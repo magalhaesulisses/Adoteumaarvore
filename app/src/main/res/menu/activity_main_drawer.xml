@@ -17,8 +17,24 @@
             android:icon="@drawable/ic_menu_nativespecies"
             android:title="@string/menu_nativeSpecies" />
         <item
-            android:id="@+id/nav_information"
-            android:icon="@drawable/ic_menu_snow"
-            android:title="@string/menu_information" />
+            android:id="@+id/nav_doar"
+            android:icon="@drawable/ic_menu_doar"
+            android:title="@string/menu_doar" />
+
+
     </group>
+    <item android:title="@string/sub_menu_title">
+        <menu>
+            <item
+                android:id="@+id/nav_information"
+                android:icon="@drawable/ic_menu_snow"
+                android:title="@string/menu_information" />
+            <item
+                android:id="@+id/nav_viveiro"
+                android:icon="@drawable/ic_menu_viveiro"
+                android:title="@string/menu_viveiro" />
+        </menu>
+    </item>
+
+
 </menu>

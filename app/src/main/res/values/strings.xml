@@ -35,7 +35,10 @@
     <string name="menu_profile">Perfil</string>
     <string name="menu_newPlant">Novo Plantio</string>
     <string name="menu_nativeSpecies">Espécies Nativas</string>
+    <string name="menu_doar">Doar</string>
     <string name="menu_information">Informativos</string>
+    <string name="menu_viveiro">Mudas Disponíveis Viveiro (IAT)</string>
+    <string name="sub_menu_title">Externos (API / Crawler)</string>
 
 
     <string name="newPlant_Plant">Plantio</string>
@@ -44,6 +47,8 @@
     <string name="newPlant_Share">Comente sobre sua experiência</string>
     <string name="newPlant_OK">OK</string>
     <string name="newPlant_Back">Voltar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

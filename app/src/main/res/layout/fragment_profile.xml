@@ -7,28 +7,28 @@
     tools:context=".activity.ui.profile.ProfileFragment">
 
     <TextView
-        android:id="@+id/profile_Name"
+        android:id="@+id/profileName"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="NomeUsuario"
         android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/profile_Login"
+        android:id="@+id/profileLogin"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:text="Login"
-        app:layout_constraintStart_toEndOf="@+id/profile_image"
-        app:layout_constraintTop_toBottomOf="@+id/profile_Name" />
+        app:layout_constraintStart_toEndOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/profileName" />
 
     <ImageView
-        android:id="@+id/profile_image"
+        android:id="@+id/profileImage"
         android:layout_width="81dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
