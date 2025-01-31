@@ -62,8 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
         txtEntrarReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterActivity.this, MainActivity.class);
-                startActivity(i);
+               finish();
             }
         });
 
@@ -124,12 +123,10 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setSobrenome(edtSobrenomeReg.getText().toString());
                 user.setLogin(edtLoginReg.getText().toString());
                 user.setEmail(edtEmailReg.getText().toString());
-
-                //Uses e-mail to generate uui
-                user.setUui(Base64Custom.encodeBase64(user.getEmail()));
-
                 user.setFone(edtFoneReg.getText().toString());
                 user.setSenha(edtSenhaReg.getText().toString());
+                //Uses e-mail to generate uui
+                user.setUui(Base64Custom.encodeBase64(user.getEmail()));
 
                 auth.createUserWithEmailAndPassword(user.getEmail(), user.getSenha()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override

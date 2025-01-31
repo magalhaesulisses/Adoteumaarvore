@@ -1,8 +1,9 @@
 package com.example.tccadoteumaarvore.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Arvore {
+public class Arvore implements Serializable {
 
      private int id;
      private String cientifico;

@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tccadoteumaarvore.R;
+import com.example.tccadoteumaarvore.activity.ui.profile.ProfileFragment;
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.example.tccadoteumaarvore.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;

@@ -4,11 +4,12 @@ import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     private String uui;
     private String nome;
     private String sobrenome;
-    //private Date datanascimento;
     private String login;
     private String email;
     private String fone;
@@ -55,16 +56,6 @@ public class Usuario {
     public void setLogin(String login) {
         this.login = login;
     }
-
-    /*
-    public Date getDatanascimento() {
-        return datanascimento;
-    }
-
-    public void setDatanascimento(Date datanascimento) {
-        this.datanascimento = datanascimento;
-    }
-     */
 
     public String getEmail() {
         return email;
