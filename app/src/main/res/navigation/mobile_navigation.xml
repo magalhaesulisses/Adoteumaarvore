@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_nativeSpecies"
-        android:name="com.example.tccadoteumaarvore.activity.ui.nativespecies.NativespeciesFragment"
+        android:name="com.example.tccadoteumaarvore.activity.ui.nativespecies.NativeSpeciesFragment"
         android:label="@string/menu_nativeSpecies"
         tools:layout="@layout/fragment_nativespecies" />
 

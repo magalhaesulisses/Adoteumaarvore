@@ -14,8 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.tccadoteumaarvore.R;
+import com.example.tccadoteumaarvore.activity.MainActivity;
 import com.example.tccadoteumaarvore.activity.RegisterActivity;
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
+import com.example.tccadoteumaarvore.databinding.FragmentNewplantBinding;
 import com.example.tccadoteumaarvore.databinding.FragmentProfileBinding;
 import com.example.tccadoteumaarvore.model.Usuario;
 import com.example.tccadoteumaarvore.utils.Base64Custom;
@@ -28,18 +30,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileFragment extends Fragment {
+    private FragmentProfileBinding binding;
     private Usuario user = new Usuario();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        //Recuperar dados do usuário logado
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         returnUserInfo();
     }
 
@@ -54,16 +56,22 @@ public class ProfileFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<DataSnapshot> task) {
                     if (task.isSuccessful()){
-                        if (task.getResult().exists()){
+                        if (task.getResult().exists()) {
                             DataSnapshot dataSnapshot = task.getResult();
                             user = dataSnapshot.getValue(Usuario.class);
-
-                        } else {
-                            System.out.println("Else");
+                            String nomeCompleto = user.getNome() + " " + user.getSobrenome();
+                            binding.profileName.setText(nomeCompleto);
+                            binding.profileLogin.setText(user.getLogin());
                         }
                     }
                 }
             }
         );
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

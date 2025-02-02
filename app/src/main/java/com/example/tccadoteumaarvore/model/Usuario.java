@@ -16,7 +16,6 @@ public class Usuario implements Serializable {
     private String senha;
 
     public Usuario() {
-
     }
 
     public void salvarUsuario(){

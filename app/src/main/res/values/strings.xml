@@ -47,6 +47,9 @@
     <string name="newPlant_Share">Comente sobre sua experiência</string>
     <string name="newPlant_OK">OK</string>
     <string name="newPlant_Back">Voltar</string>
+
+    <string name="fragments_Consultar">Consultar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
