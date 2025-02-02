@@ -49,13 +49,20 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    // jsoup HTML parser library @ https://jsoup.org/
-    implementation("org.jsoup:jsoup:1.18.3")
+
     implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-storage")
+
+    //jsoup HTML parser library @ https://jsoup.org/
+    implementation("org.jsoup:jsoup:1.18.3")
+
+    //Retrofit
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.5.0")
+
 
 
 

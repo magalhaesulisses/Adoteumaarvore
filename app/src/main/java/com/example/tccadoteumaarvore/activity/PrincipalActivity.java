@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tccadoteumaarvore.databinding.ActivityProfileBinding;
 
-public class ProfileActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityProfileBinding binding;
@@ -30,8 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
         
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_profile,
                 R.id.nav_newPlant,

@@ -90,13 +90,14 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     //Intent esperado, leva aos Fragments
+                    /**
                     Intent i = new Intent(MainActivity.this, ProfileActivity.class);
                     startActivity(i);
+                     **/
                     //Intent teste, leva ao Scrapper
-                    /**
                     Intent i = new Intent(MainActivity.this, CrawlerActivity.class);
                     startActivity(i);
-                     **/
+
                 }else{
                     String excpt;
                     try {

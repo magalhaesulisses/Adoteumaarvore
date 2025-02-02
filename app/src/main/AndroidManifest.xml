@@ -18,7 +18,7 @@
             android:name=".activity.CrawlerActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name=".activity.PrincipalActivity"
             android:exported="false"
             android:label="@string/title_activity_profile"
             android:theme="@style/Theme.AdoteUmaÁrvore.NoActionBar" />
