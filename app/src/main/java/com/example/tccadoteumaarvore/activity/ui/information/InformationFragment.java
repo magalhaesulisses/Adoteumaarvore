@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.tccadoteumaarvore.activity.CrawlerActivity;
 import com.example.tccadoteumaarvore.api.InformativoService;
 import com.example.tccadoteumaarvore.databinding.FragmentInformationBinding;
 import com.example.tccadoteumaarvore.model.Informativo;
