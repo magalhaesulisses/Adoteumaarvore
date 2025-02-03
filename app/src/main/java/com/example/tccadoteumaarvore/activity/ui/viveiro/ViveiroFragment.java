@@ -29,23 +29,21 @@ public class ViveiroFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /**
-
         //Scrapper Example
+        /**
         new Thread(new Runnable() {
             @Override public void run() {
                 try{
                     Document doc = Jsoup.connect("https://www.toledo.pr.gov.br/secretarias/secretaria_meio_ambiente/programas_da_secretaria/viveiro_municipal_de_mudas")
                             .timeout(6000).get();
 
-                    Elements tableSpecies = doc.select("td[p]");
+                    Elements tableSpecies = doc.select("table.tBodies[] "); //td[p]
                     resultadoScrap = tableSpecies.text();
                     binding.txtViveiroSpecies.setText(resultadoScrap);
                 }
                 catch (Exception e){
                     //
                 }
-
                 runOnUiThread(new Runnable() {
                     @Override public void run() {
                         binding.txtViveiroSpecies.setText(resultadoScrap);
@@ -53,7 +51,6 @@ public class ViveiroFragment extends Fragment {
                 });
             }
         }).start();
-
-        **/
+         **/
     }
 }

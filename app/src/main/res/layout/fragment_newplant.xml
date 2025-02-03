@@ -23,7 +23,7 @@
             android:textSize="34sp" />
 
         <AutoCompleteTextView
-            android:id="@+id/newSpecies_edtSpecies"
+            android:id="@+id/nStxtSpecies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -32,17 +32,17 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/newSpecies_name"
+            android:id="@+id/nStxtApelido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:ems="10"
             android:inputType="text"
-            android:text="@string/newPlant_Nick"
+            android:hint="@string/newPlant_Nick"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/newSpecies_edtMutiple"
+            android:id="@+id/nSedtMutiple"
             android:layout_width="match_parent"
             android:layout_height="222dp"
             android:layout_margin="10dp"
@@ -50,24 +50,24 @@
             android:gravity="start|top"
             android:inputType="textMultiLine"
             android:singleLine="false"
-            android:text="@string/newPlant_Share"
+            android:hint="@string/newPlant_Share"
             android:textSize="20sp" />
 
         <ImageButton
-            android:id="@+id/newSpecies_imgButton"
+            android:id="@+id/nSimgButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_gallery" />
 
         <Button
-            android:id="@+id/newSpecies_btnAdd"
+            android:id="@+id/nSbtnAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/darkBrown"
             android:text="@string/newPlant_OK" />
 
         <Button
-            android:id="@+id/newSpecies_btnBack"
+            android:id="@+id/nSbtnBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/midBrown"

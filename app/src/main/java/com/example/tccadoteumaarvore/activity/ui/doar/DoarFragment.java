@@ -11,6 +11,7 @@ import com.example.tccadoteumaarvore.databinding.FragmentDoarBinding;
 
 public class DoarFragment extends Fragment {
     private FragmentDoarBinding binding;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

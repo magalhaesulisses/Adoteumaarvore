@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Usuario implements Serializable {
     private String uui;
@@ -14,6 +15,15 @@ public class Usuario implements Serializable {
     private String email;
     private String fone;
     private String senha;
+    private ArrayList<Plantio> plantios;
+
+    public ArrayList<Plantio> getPlantios() {
+        return plantios;
+    }
+
+    public void setPlantios(ArrayList<Plantio> plantios) {
+        this.plantios = plantios;
+    }
 
     public Usuario() {
     }

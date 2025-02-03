@@ -51,6 +51,7 @@ public class ProfileFragment extends Fragment {
         String uuiUser = Base64Custom.encodeBase64(userAuth.getCurrentUser().getEmail());
         DatabaseReference databaseref = ConfigFirebase.getFirebaseRef();
 
+        //TODO:: usuário possui o child como 0, por se tratar de um array, alterar JSON!
         databaseref.child("usuarios").child(uuiUser).get().addOnCompleteListener(
             new OnCompleteListener<DataSnapshot>() {
                 @Override
