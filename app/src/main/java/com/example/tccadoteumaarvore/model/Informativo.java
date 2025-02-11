@@ -6,7 +6,7 @@ public class Informativo {
     private String country;
     private Date date;
     private String text;
-    //Realizado teste com o campo courseName
+
 
     public String getCountry() {
         return country;

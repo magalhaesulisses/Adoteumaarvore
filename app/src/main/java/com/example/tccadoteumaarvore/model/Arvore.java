@@ -9,42 +9,16 @@ public class Arvore implements Serializable {
      private int id;
      private String cientifico;
      private String popular;
-     private Date datacadastro;
      private String luminosidade;
-     private ArrayList<String> origem;
-     private ArrayList<String> clima;
+     private String origem;
+     private String clima;
      private String ciclovida;
      private String porte;
      private String familia;
      private String adubo;
      private String rega;
-     private Doador doador;
-
-    public Doador getDoador() {
-        return doador;
-    }
-
-    public void setDoador(Doador doador) {
-        this.doador = doador;
-    }
 
     public Arvore() {
-    }
-
-    public ArrayList<String> getOrigem() {
-        return origem;
-    }
-
-    public void setOrigem(ArrayList<String> origem) {
-        this.origem = origem;
-    }
-
-    public ArrayList<String> getClima() {
-        return clima;
-    }
-
-    public void setClima(ArrayList<String> clima) {
-        this.clima = clima;
     }
 
     public int getId() {
@@ -71,20 +45,28 @@ public class Arvore implements Serializable {
         this.popular = popular;
     }
 
-    public Date getDatacadastro() {
-        return datacadastro;
-    }
-
-    public void setDatacadastro(Date datacadastro) {
-        this.datacadastro = datacadastro;
-    }
-
     public String getLuminosidade() {
         return luminosidade;
     }
 
     public void setLuminosidade(String luminosidade) {
         this.luminosidade = luminosidade;
+    }
+
+    public String getOrigem() {
+        return origem;
+    }
+
+    public void setOrigem(String origem) {
+        this.origem = origem;
+    }
+
+    public String getClima() {
+        return clima;
+    }
+
+    public void setClima(String clima) {
+        this.clima = clima;
     }
 
     public String getCiclovida() {

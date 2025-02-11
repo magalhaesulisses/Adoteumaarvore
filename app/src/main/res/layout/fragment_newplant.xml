@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:height="60dp"
-            android:text="@string/newPlant_Species"
+            android:hint="@string/newPlant_Species"
             android:textSize="20sp" />
 
         <EditText

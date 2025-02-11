@@ -40,7 +40,7 @@ public class InformationFragment extends Fragment{
 
         retrofit = new Retrofit.Builder()
                 //.baseUrl("https://www.jsonkeeper.com/b/") TESTE
-                .baseUrl("http://apiadvisor.climatempo.com.br/")
+                .baseUrl("https://apiadvisor.climatempo.com.br/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -57,13 +57,12 @@ public class InformationFragment extends Fragment{
                             if (response.isSuccessful()) {
                                 informativosList = response.body();
                                 Informativo info = informativosList.get(0);
-                                binding.txtInformation.setText(info.getCountry());
+                                binding.txtInformation.setText(info.getText());
                             }
                         }
                         @Override
                         public void onFailure(Call<ArrayList<Informativo>> call, Throwable throwable) {
                             Toast.makeText(getContext(), "Ocorreu um erro durante a consulta", Toast.LENGTH_SHORT).show();
-                            binding.txtInformation.setText("");
                         }
                     });
                 }

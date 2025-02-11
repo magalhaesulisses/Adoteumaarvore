@@ -7,69 +7,18 @@
     android:layout_margin="16dp"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/txtSCientifico"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:text="Cientifico"
+        android:textSize="24sp" />
 
-        <ImageView
-            android:id="@+id/imgSImagem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+    <TextView
+        android:id="@+id/txtSPopular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Popular"
+        android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/txtSCientifico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Cientifico"
-            android:textSize="24sp" />
-
-        <TextView
-            android:id="@+id/txtSPopular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Popular"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txtSOrigem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Origem: " />
-
-        <TextView
-            android:id="@+id/txtSPorte"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Porte: " />
-
-        <TextView
-            android:id="@+id/txtSRega"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rega: " />
-
-        <TextView
-            android:id="@+id/txtSDoacao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Disponíveis Doação"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/txtSDoarNome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nome Doador: " />
-
-        <TextView
-            android:id="@+id/txtSDoarTelefone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tel. Doador: " />
-
-    </LinearLayout>
 </LinearLayout>

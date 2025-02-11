@@ -48,7 +48,10 @@
     <string name="newPlant_OK">OK</string>
     <string name="newPlant_Back">Voltar</string>
 
-    <string name="fragments_Consultar">Consultar</string>
+    <string name="viveiro_Viveiro">Espécies no Viveiro (IAT)</string>
+
+
+    <string name="general_Consultar">Consultar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

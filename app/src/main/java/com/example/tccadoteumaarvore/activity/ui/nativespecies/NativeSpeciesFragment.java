@@ -31,6 +31,7 @@ public class NativeSpeciesFragment extends Fragment {
     private FragmentNativespeciesBinding binding;
     private RecyclerView recyclerView;
     private ArrayList<Arvore> listaEspecies = new ArrayList<>();
+    private Arvore arvore = new Arvore();
     private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,9 +55,6 @@ public class NativeSpeciesFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-
-
-
     }
 
     //TODO::Debugar Código e verificar problema!
@@ -65,13 +63,12 @@ public class NativeSpeciesFragment extends Fragment {
         referenceArvores.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Arvore arvore;
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    arvore = new Arvore();
                     arvore = postSnapshot.getValue(Arvore.class);
                     listaEspecies.add(arvore);
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

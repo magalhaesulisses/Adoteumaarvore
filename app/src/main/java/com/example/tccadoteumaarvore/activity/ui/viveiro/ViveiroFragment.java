@@ -30,7 +30,6 @@ public class ViveiroFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //Scrapper Example
-        /**
         new Thread(new Runnable() {
             @Override public void run() {
                 try{
@@ -44,13 +43,13 @@ public class ViveiroFragment extends Fragment {
                 catch (Exception e){
                     //
                 }
-                runOnUiThread(new Runnable() {
+                getActivity().runOnUiThread(new Runnable() {
                     @Override public void run() {
                         binding.txtViveiroSpecies.setText(resultadoScrap);
                     }
                 });
             }
         }).start();
-         **/
+
     }
 }

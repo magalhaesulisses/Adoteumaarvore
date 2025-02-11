@@ -26,11 +26,10 @@ import java.util.ArrayList;
 public class NewPlantFragment extends Fragment {
 
     private FragmentNewplantBinding binding;
-    //Atributes
     private String especie;
     private String apelido;
     private String sobre;
-    private ArrayList<Imagem> imagens;
+    private Imagem imagens;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -41,19 +40,15 @@ public class NewPlantFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Image BtnAction
 
         binding.nSbtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 especie = String.valueOf(binding.nStxtSpecies.getText());
                 apelido = String.valueOf(binding.nStxtApelido.getText());
-                //Imagem
             }
         });
     }
-
-
 
     @Override
     public void onDestroyView() {

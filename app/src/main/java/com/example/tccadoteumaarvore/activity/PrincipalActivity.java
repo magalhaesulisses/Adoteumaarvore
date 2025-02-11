@@ -35,7 +35,9 @@ public class PrincipalActivity extends AppCompatActivity {
                 R.id.nav_profile,
                 R.id.nav_newPlant,
                 R.id.nav_nativeSpecies,
-                R.id.nav_information)
+                R.id.nav_information,
+                R.id.nav_doar,
+                R.id.nav_viveiro)
 
                 .setOpenableLayout(drawer)
                 .build();
