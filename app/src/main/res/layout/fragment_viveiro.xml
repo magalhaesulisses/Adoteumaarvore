@@ -25,8 +25,7 @@
             android:id="@+id/txtViveiroSpecies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Ipê Roxo  110  Ipê Amarelo  20  (para locais com Rede Elétrica)  Cereja do Japão  80  (para locais com Rede Elétrica)  Primavera  120 (para locais com Rede Elétrica)  Quaresmeira  200 (para locais com Rede Elétrica)  Pata de Vaca  40   (para locais com Rede Elétrica)  Acácia Manduirana  20  Jacarandá  40" />
+            android:gravity="center" />
 
     </LinearLayout>
 

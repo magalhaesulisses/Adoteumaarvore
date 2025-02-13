@@ -63,10 +63,12 @@ public class NativeSpeciesFragment extends Fragment {
         referenceArvores.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     arvore = new Arvore();
                     arvore = postSnapshot.getValue(Arvore.class);
                     listaEspecies.add(arvore);
+
                 }
             }
             @Override

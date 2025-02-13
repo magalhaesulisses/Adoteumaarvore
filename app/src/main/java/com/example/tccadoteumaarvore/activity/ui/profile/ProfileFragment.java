@@ -1,23 +1,16 @@
 package com.example.tccadoteumaarvore.activity.ui.profile;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+
 
 import com.example.tccadoteumaarvore.R;
-import com.example.tccadoteumaarvore.activity.MainActivity;
-import com.example.tccadoteumaarvore.activity.RegisterActivity;
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
-import com.example.tccadoteumaarvore.databinding.FragmentNewplantBinding;
 import com.example.tccadoteumaarvore.databinding.FragmentProfileBinding;
 import com.example.tccadoteumaarvore.model.Usuario;
 import com.example.tccadoteumaarvore.utils.Base64Custom;
@@ -43,7 +36,21 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         returnUserInfo();
+
+/**
+        MapFragment mapFragment = (MapFragment) getParentFragmentManager().findFragmentById(R.id.map_fragment);
+        if (mapFragment != null) {
+            mapFragment.getMapAsync(new MapFragmentCallback() {
+                @Override
+                public void onMapReady(TomTomMap map) {
+                    tomTomMap = map;
+                    // Configure o mapa conforme necessário
+                }
+            });
+        }
+ **/
     }
+
 
     public void returnUserInfo(){
 
@@ -51,7 +58,6 @@ public class ProfileFragment extends Fragment {
         String uuiUser = Base64Custom.encodeBase64(userAuth.getCurrentUser().getEmail());
         DatabaseReference databaseref = ConfigFirebase.getFirebaseRef();
 
-        //TODO:: usuário possui o child como 0, por se tratar de um array, alterar JSON!
         databaseref.child("usuarios").child(uuiUser).get().addOnCompleteListener(
             new OnCompleteListener<DataSnapshot>() {
                 @Override
