@@ -1,6 +1,7 @@
 package com.example.tccadoteumaarvore.activity.ui.newplant;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +33,12 @@ public class NewPlantFragment extends Fragment {
 
     private FragmentNewplantBinding binding;
     private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
-    private Spinner spinner;
+    private Spinner listaEspecies;
     private ArrayList<String> especies;
     private String especie;
     private String apelido;
     private String sobre;
+    private ArrayAdapter<String> adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,15 +50,22 @@ public class NewPlantFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        listaEspecies = binding.spinnerEspecies;
+        especies = new ArrayList<>();
+        adapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_dropdown_item, especies);
+        listaEspecies.setAdapter(adapter);
+
         //Listener Botão OK
         binding.nSbtnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                especie = (String) spinner.getSelectedItem();
+                especie = (String) listaEspecies.getSelectedItem();
                 apelido = String.valueOf(binding.nStxtApelido.getText());
                 sobre = String.valueOf(binding.nSedtMutiple.getText());
             }
         });
+        carregarEspecies();
     }
 
     public void carregarEspecies(){
@@ -64,24 +73,22 @@ public class NewPlantFragment extends Fragment {
         referenceArvores.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                especies.clear();
 
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    //Arvore arvore;
-                    //arvore = postSnapshot.getValue(Arvore.class);
-                    //especies.add(arvore.getPopular());
-                    especies.add(postSnapshot.getValue(Arvore.class).getPopular());
+                    Arvore arvore = postSnapshot.getValue(Arvore.class);
+                    if(arvore !=null){
+                        especies.add(arvore.getPopular());
+                    }
                 }
+                adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("Firebase", "Erro ao buscar dados", error.toException());
             }
         });
 
-        ArrayAdapter<String> adapterSpecies;
-        adapterSpecies = new ArrayAdapter<String>(getContext(),
-                android.R.layout.simple_spinner_dropdown_item, especies);
-        spinner.setAdapter(adapterSpecies);
     }
 
     @Override

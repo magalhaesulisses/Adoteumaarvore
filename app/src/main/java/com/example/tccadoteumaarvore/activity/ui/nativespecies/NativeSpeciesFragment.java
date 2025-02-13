@@ -1,6 +1,7 @@
 package com.example.tccadoteumaarvore.activity.ui.nativespecies;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ public class NativeSpeciesFragment extends Fragment {
     private ArrayList<Arvore> listaEspecies = new ArrayList<>();
     private Arvore arvore = new Arvore();
     private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
+    private Adapter adapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,18 +45,16 @@ public class NativeSpeciesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //Listagem de Banco
-        this.popularListaArvores();
-
         //Adapter
-        Adapter adapter = new Adapter(listaEspecies);
-
+        adapter = new Adapter(listaEspecies);
         //Recycler
         recyclerView = binding.recyclerViewNative;
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
+        //popularLista
+        popularListaArvores();
     }
 
     //TODO::Debugar Código e verificar problema!
@@ -63,17 +63,16 @@ public class NativeSpeciesFragment extends Fragment {
         referenceArvores.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-
+                listaEspecies.clear();
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                    arvore = new Arvore();
-                    arvore = postSnapshot.getValue(Arvore.class);
+                    Arvore arvore = postSnapshot.getValue(Arvore.class);
                     listaEspecies.add(arvore);
-
                 }
+                adapter.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("Firebase", "Erro ao buscar dados", error.toException());
             }
         });
     }
