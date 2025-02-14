@@ -93,12 +93,6 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, PrincipalActivity.class);
                     startActivity(i);
 
-                    //Intent Teste
-                    /**
-                    Intent i = new Intent(MainActivity.this, CrawlerActivity.class);
-                    startActivity(i);
-                    **/
-
                 }else{
                     String excpt;
                     try {

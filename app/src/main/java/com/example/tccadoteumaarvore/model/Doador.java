@@ -8,9 +8,7 @@ public class Doador {
     public Doador() {
     }
 
-    public String getUui() {
-        return uui;
-    }
+    public String getUui() { return uui; }
 
     public void setUui(String uui) {
         this.uui = uui;

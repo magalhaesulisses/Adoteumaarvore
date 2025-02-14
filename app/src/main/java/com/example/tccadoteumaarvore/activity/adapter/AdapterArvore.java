@@ -3,7 +3,6 @@ package com.example.tccadoteumaarvore.activity.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,14 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tccadoteumaarvore.R;
 import com.example.tccadoteumaarvore.model.Arvore;
-import com.example.tccadoteumaarvore.model.Doador;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
+public class AdapterArvore extends RecyclerView.Adapter<AdapterArvore.MyViewHolder> {
     private ArrayList<Arvore> listaEspecies;
 
-    public Adapter(ArrayList<Arvore> list) {
+    public AdapterArvore(ArrayList<Arvore> list) {
         this.listaEspecies = list;
     }
 

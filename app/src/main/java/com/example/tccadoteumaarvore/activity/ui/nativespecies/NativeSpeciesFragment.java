@@ -1,30 +1,32 @@
 package com.example.tccadoteumaarvore.activity.ui.nativespecies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tccadoteumaarvore.activity.adapter.Adapter;
+import com.example.tccadoteumaarvore.activity.adapter.AdapterArvore;
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.example.tccadoteumaarvore.databinding.FragmentNativespeciesBinding;
 import com.example.tccadoteumaarvore.model.Arvore;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.tccadoteumaarvore.utils.RecyclerItemClickListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import org.checkerframework.checker.units.qual.A;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class NativeSpeciesFragment extends Fragment {
@@ -32,9 +34,8 @@ public class NativeSpeciesFragment extends Fragment {
     private FragmentNativespeciesBinding binding;
     private RecyclerView recyclerView;
     private ArrayList<Arvore> listaEspecies = new ArrayList<>();
-    private Arvore arvore = new Arvore();
     private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
-    private Adapter adapter;
+    private AdapterArvore adapterArvore;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -45,19 +46,43 @@ public class NativeSpeciesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         //Adapter
-        adapter = new Adapter(listaEspecies);
+        adapterArvore = new AdapterArvore(listaEspecies);
+
         //Recycler
         recyclerView = binding.recyclerViewNative;
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        //popularLista
+        recyclerView.addItemDecoration( new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter(adapterArvore);
         popularListaArvores();
+
+        recyclerView.addOnItemTouchListener(
+            new RecyclerItemClickListener(getContext(), recyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Arvore arvore = listaEspecies.get(position);
+                        //Intent i = new Intent()
+                        Toast.makeText(getContext(), "Clique: "+ arvore.getPopular(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+
+                    }
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    }
+                }
+            )
+        );
     }
 
-    //TODO::Debugar Código e verificar problema!
     public void popularListaArvores(){
         DatabaseReference referenceArvores = reference.child("arvores");
         referenceArvores.addValueEventListener(new ValueEventListener() {
@@ -68,7 +93,7 @@ public class NativeSpeciesFragment extends Fragment {
                     Arvore arvore = postSnapshot.getValue(Arvore.class);
                     listaEspecies.add(arvore);
                 }
-                adapter.notifyDataSetChanged();
+                adapterArvore.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
