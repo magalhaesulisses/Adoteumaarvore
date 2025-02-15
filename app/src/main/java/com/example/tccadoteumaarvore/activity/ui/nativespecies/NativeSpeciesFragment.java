@@ -1,6 +1,5 @@
 package com.example.tccadoteumaarvore.activity.ui.nativespecies;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.tccadoteumaarvore.activity.adapter.AdapterArvore;
+import com.example.tccadoteumaarvore.activity.adapter.AdapterEspecies;
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.example.tccadoteumaarvore.databinding.FragmentNativespeciesBinding;
 import com.example.tccadoteumaarvore.model.Arvore;
@@ -35,7 +34,7 @@ public class NativeSpeciesFragment extends Fragment {
     private RecyclerView recyclerView;
     private ArrayList<Arvore> listaEspecies = new ArrayList<>();
     private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
-    private AdapterArvore adapterArvore;
+    private AdapterEspecies adapterEspecies;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -48,15 +47,15 @@ public class NativeSpeciesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //Adapter
-        adapterArvore = new AdapterArvore(listaEspecies);
+        adapterEspecies = new AdapterEspecies(listaEspecies);
 
         //Recycler
         recyclerView = binding.recyclerViewNative;
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration( new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
-        recyclerView.setAdapter(adapterArvore);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayout.VERTICAL));
+        recyclerView.setAdapter(adapterEspecies);
         popularListaArvores();
 
         recyclerView.addOnItemTouchListener(
@@ -65,7 +64,9 @@ public class NativeSpeciesFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Arvore arvore = listaEspecies.get(position);
-                        //Intent i = new Intent()
+
+                        //Intent i = new Intent() //TODO Criar novo Intent Para Activity Externa
+
                         Toast.makeText(getContext(), "Clique: "+ arvore.getPopular(), Toast.LENGTH_SHORT).show();
                     }
 
@@ -93,7 +94,7 @@ public class NativeSpeciesFragment extends Fragment {
                     Arvore arvore = postSnapshot.getValue(Arvore.class);
                     listaEspecies.add(arvore);
                 }
-                adapterArvore.notifyDataSetChanged();
+                adapterEspecies.notifyDataSetChanged();
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

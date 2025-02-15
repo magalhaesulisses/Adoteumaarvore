@@ -13,10 +13,10 @@ import com.example.tccadoteumaarvore.model.Arvore;
 
 import java.util.ArrayList;
 
-public class AdapterArvore extends RecyclerView.Adapter<AdapterArvore.MyViewHolder> {
+public class AdapterEspecies extends RecyclerView.Adapter<AdapterEspecies.MyViewHolder> {
     private ArrayList<Arvore> listaEspecies;
 
-    public AdapterArvore(ArrayList<Arvore> list) {
+    public AdapterEspecies(ArrayList<Arvore> list) {
         this.listaEspecies = list;
     }
 
