@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    android:textAlignment="viewEnd"
+    tools:context=".activity.EspecieActivity">
+
+
+    <TextView
+        android:id="@+id/especieCientifico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lagerstroemia Indica"
+        android:textAlignment="center"
+        android:textSize="34sp" />
+
+    <TextView
+        android:id="@+id/especiePopular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center_vertical"
+        android:text="Resedá"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/especieAdubo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Adubo: Composta Orgânica"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especieCicloVida"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Ciclo de Vida: Perene"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especieClima"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Clima: Continental"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especieFamilia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Família: Lythraceae"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especieLuminosidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Luminosidade: Sol Pleno"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especieOrigem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Origem: Asia"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especiePorte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Porte: Médio"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/especieRega"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Rega: Diária"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/buttonVoltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="Voltar"
+        android:textSize="16sp" />
+</LinearLayout>

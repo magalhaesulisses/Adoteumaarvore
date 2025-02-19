@@ -1,5 +1,6 @@
 package com.example.tccadoteumaarvore.activity.ui.nativespecies;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,9 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tccadoteumaarvore.activity.EspecieActivity;
+import com.example.tccadoteumaarvore.activity.MainActivity;
+import com.example.tccadoteumaarvore.activity.PrincipalActivity;
 import com.example.tccadoteumaarvore.activity.adapter.AdapterEspecies;
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.example.tccadoteumaarvore.databinding.FragmentNativespeciesBinding;
@@ -64,10 +68,12 @@ public class NativeSpeciesFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Arvore arvore = listaEspecies.get(position);
-
-                        //Intent i = new Intent() //TODO Criar novo Intent Para Activity Externa
-
-                        Toast.makeText(getContext(), "Clique: "+ arvore.getPopular(), Toast.LENGTH_SHORT).show();
+                        int pos = position + 1;
+                        Intent i = new Intent(getActivity(), EspecieActivity.class);
+                        String indiceSpinner = Integer.toString(pos);
+                        indiceSpinner = "0" + indiceSpinner;
+                        i.putExtra("position", indiceSpinner);
+                        startActivity(i);
                     }
 
                     @Override

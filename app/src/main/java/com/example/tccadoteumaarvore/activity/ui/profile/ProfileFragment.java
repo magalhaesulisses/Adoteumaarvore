@@ -1,6 +1,9 @@
 package com.example.tccadoteumaarvore.activity.ui.profile;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -12,6 +15,7 @@ import android.widget.EditText;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -40,7 +44,6 @@ import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2;
 
 import java.util.ArrayList;
 
-
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private Usuario user = new Usuario();
@@ -48,18 +51,8 @@ public class ProfileFragment extends Fragment {
     //Maps
     MapView mapa;
     LocationManager locMngr;
-    GeoPoint pontoAtual = new GeoPoint(-24.7272, -53.7408);
     ArrayList<Marker> marcas;
-    EditText edMarcador;
-    int cont = 1;
-    Marker.OnMarkerClickListener markerListener = new Marker.OnMarkerClickListener() {
-        @Override
-        public boolean onMarkerClick(Marker marker, MapView mapView) {
-            mapView.getOverlays().remove(marker);
-            marcas.remove(marker);
-            return true;
-        }
-    };
+    GeoPoint centroToledo = new GeoPoint(-24.7248, -53.7362);
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -72,28 +65,21 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         returnUserInfo();
 
-        //TODO: Corrigir implementação de Mapa
-        /**
         Context ctx = getContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-        //EdgeToEdge.enable(this);
 
-        //setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        edMarcador = binding.ed_marcador;
         mapa = (MapView) binding.mapa;
         mapa.setTileSource(TileSourceFactory.MAPNIK);
         mapa.setZoomLevel(16.0);
+        mapa.setInitCenter(centroToledo);
+
+        //TODO: Adicionar Array de Objetos
         marcas = new ArrayList<>();
         if (savedInstanceState != null) {
             ArrayList<Marker> marcasAnteriores = (ArrayList<Marker>) savedInstanceState.getSerializable("marcas");
             if (marcasAnteriores != null) {
                 for (Marker m : marcasAnteriores) {
-                    Marker nova = new Marker(mapa); // é uma nova instância do mapa, o antigo não desenha!
+                    Marker nova = new Marker(mapa);
                     nova.setPosition(m.getPosition());
                     nova.setTitle(m.getTitle());
                     marcas.add(nova);
@@ -101,7 +87,24 @@ public class ProfileFragment extends Fragment {
                 }
             }
         }
-        **/
+
+        // Localização
+        locMngr = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) !=
+                        PackageManager.PERMISSION_GRANTED &&
+                            ActivityCompat.checkSelfPermission(getContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
+                                PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        // Re-centraliza posição 2000ms
+        locMngr.requestLocationUpdates(locMngr.GPS_PROVIDER, 2000, 0F, new LocationListener(){
+            @Override
+            public void onLocationChanged(@NonNull Location location) {
+                centroToledo = new GeoPoint(location.getLatitude(), location.getLongitude());
+                mapa.setInitCenter(centroToledo);
+            }
+        });
     }
 
 

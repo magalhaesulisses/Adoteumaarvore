@@ -1,11 +1,11 @@
 package com.example.tccadoteumaarvore.model;
 
-public class Doador {
+public class Doacao {
     private String uui;
     private String nome;
     private String telefone;
 
-    public Doador() {
+    public Doacao() {
     }
 
     public String getUui() { return uui; }
