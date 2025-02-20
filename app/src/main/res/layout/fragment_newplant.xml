@@ -1,78 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="25dp"
     tools:context=".activity.ui.newplant.NewPlantFragment">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/text_newplant"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="5dp"
+        android:text="Espécie"
+        android:textSize="24sp" />
 
-        <TextView
-            android:id="@+id/text_newplant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="@string/newPlant_Plant"
-            android:textAlignment="viewStart"
-            android:textSize="34sp" />
+    <Spinner
+        android:id="@+id/spinnerEspecies"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:scrollbarSize="4dp" />
 
-        <Spinner
-            android:id="@+id/spinnerEspecies"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:scrollbarSize="4dp" />
+    <EditText
+        android:id="@+id/nStxtApelido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:hint="@string/newPlant_Nick"
+        android:inputType="text"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/nStxtApelido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:inputType="text"
-            android:hint="@string/newPlant_Nick"
-            android:textSize="20sp" />
+    <EditText
+        android:id="@+id/nSedtMutiple"
+        android:layout_width="match_parent"
+        android:layout_height="222dp"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/newPlant_Share"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/nSedtMutiple"
-            android:layout_width="match_parent"
-            android:layout_height="222dp"
-            android:layout_margin="10dp"
-            android:ems="10"
-            android:gravity="start|top"
-            android:inputType="textMultiLine"
-            android:singleLine="false"
-            android:hint="@string/newPlant_Share"
-            android:textSize="20sp" />
+    <Button
+        android:id="@+id/nSbtnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:backgroundTint="@color/darkBrown"
+        android:text="@string/newPlant_OK" />
 
-        <ImageButton
-            android:id="@+id/nSimgButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_gallery" />
+    <Button
+        android:id="@+id/nSbtnBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:backgroundTint="@color/midBrown"
+        android:text="@string/newPlant_Back" />
 
-        <Button
-            android:id="@+id/nSbtnAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/darkBrown"
-            android:text="@string/newPlant_OK" />
-
-        <Button
-            android:id="@+id/nSbtnBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/midBrown"
-            android:text="@string/newPlant_Back" />
-
-
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

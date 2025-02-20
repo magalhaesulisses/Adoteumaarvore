@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="25dp"
     android:orientation="vertical"
     android:textAlignment="viewEnd"
     tools:context=".activity.EspecieActivity">
@@ -23,9 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:gravity="center_vertical"
         android:text="Resedá"
-        android:textAlignment="center"
         android:textSize="24sp" />
 
     <TextView

@@ -24,7 +24,6 @@ public class Usuario implements Serializable {
         reference.child("usuarios").child(this.uui).setValue(this);
     }
 
-    @Exclude
     public String getUui() {
         return uui;
     }

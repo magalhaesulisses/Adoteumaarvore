@@ -88,7 +88,6 @@ public class NewPlantFragment extends Fragment {
                 Log.e("Firebase", "Erro ao buscar dados", error.toException());
             }
         });
-
     }
 
     @Override

@@ -1,17 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="25dp"
+    android:orientation="vertical"
     tools:context=".activity.ui.doar.DoarFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/txtDoarEspecie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Espécie"
+        android:layout_margin="5dp"
+        android:textSize="24sp" />
+
+    <Spinner
+        android:id="@+id/spinnerDoarEspecie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:scrollbarSize="6dp" />
+
+    <TextView
+        android:id="@+id/txtDoarQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Quantidade"
+        android:textSize="24sp" />
+
+    <SeekBar
+        android:id="@+id/seekBarDoarQuantidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/seekBarValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text=""
+        android:textAlignment="center" />
+
+    <Button
+        android:id="@+id/buttonDoar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doar"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:id="@+id/txtDoacoes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Doações"
+        android:layout_margin="5dp"
+        android:paddingTop="30dp"
+        android:textSize="24sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewDoar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/hello_blank_fragment"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="75dp" />
+        android:layout_margin="5dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
