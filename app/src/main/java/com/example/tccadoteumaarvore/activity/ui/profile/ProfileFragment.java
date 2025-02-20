@@ -2,37 +2,36 @@ package com.example.tccadoteumaarvore.activity.ui.profile;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.example.tccadoteumaarvore.databinding.FragmentProfileBinding;
+import com.example.tccadoteumaarvore.model.Plantio;
 import com.example.tccadoteumaarvore.model.Usuario;
 import com.example.tccadoteumaarvore.utils.Base64Custom;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import org.osmdroid.api.IGeoPoint;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.osmdroid.api.IMapController;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
@@ -40,13 +39,17 @@ import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.ItemizedOverlayWithFocus;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.OverlayItem;
-import org.osmdroid.views.overlay.gridlines.LatLonGridlineOverlay2;
+
 
 import java.util.ArrayList;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
-    private Usuario user = new Usuario();
+    private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
+    private ArrayList<Plantio> plantios = new ArrayList<>();
+    private Plantio plantio;
+    private Usuario user;
+    IMapController mapController;
 
     //Maps
     MapView mapa;
@@ -64,28 +67,40 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         returnUserInfo();
+        returnPlantiosUsuario();
 
         Context ctx = getContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         mapa = (MapView) binding.mapa;
         mapa.setTileSource(TileSourceFactory.MAPNIK);
-        mapa.setZoomLevel(16.0);
-        mapa.setInitCenter(centroToledo);
+        //mapa.setZoomLevel(16.0);
+        //mapa.setInitCenter(centroToledo);
+        IMapController mapController = mapa.getController();
+        mapController.setZoom(17.0);
+        mapController.setCenter(centroToledo);
 
-        //TODO: Adicionar Array de Objetos
-        marcas = new ArrayList<>();
-        if (savedInstanceState != null) {
-            ArrayList<Marker> marcasAnteriores = (ArrayList<Marker>) savedInstanceState.getSerializable("marcas");
-            if (marcasAnteriores != null) {
-                for (Marker m : marcasAnteriores) {
-                    Marker nova = new Marker(mapa);
-                    nova.setPosition(m.getPosition());
-                    nova.setTitle(m.getTitle());
-                    marcas.add(nova);
-                    mapa.getOverlays().add(nova);
-                }
+        ArrayList<OverlayItem> marcas = new ArrayList<>();
+        //Marcando no mapa os Plantios Realizados
+        if (plantios != null){
+            for (Plantio p : plantios){
+                OverlayItem overlayItem = new OverlayItem(p.getApelido(), p.getSobre(), new GeoPoint(p.getPosLatitude(), p.getPosLongitude()));
+                Drawable m = overlayItem.getMarker(0);
+                marcas.add(overlayItem);
             }
+            ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getContext(), marcas, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                @Override
+                public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                    return true;
+                }
+
+                @Override
+                public boolean onItemLongPress(int index, OverlayItem item) {
+                    return false;
+                }
+            });
+            mOverlay.setFocusItemsOnTap(true);
+            mapa.getOverlays().add(mOverlay);
         }
 
         // Localização
@@ -102,7 +117,6 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onLocationChanged(@NonNull Location location) {
                 centroToledo = new GeoPoint(location.getLatitude(), location.getLongitude());
-                mapa.setInitCenter(centroToledo);
             }
         });
     }
@@ -130,6 +144,34 @@ public class ProfileFragment extends Fragment {
                 }
             }
         );
+    }
+
+    public void returnPlantiosUsuario(){
+        DatabaseReference referencePlantios = reference.child("plantios");
+        Query usuarioPesquisa = referencePlantios.orderByChild("uuiUser").equalTo(carregaUsuario());
+        usuarioPesquisa.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                plantios.clear();
+                plantio = new Plantio();
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    plantio = postSnapshot.getValue(Plantio.class);
+                    if(plantio !=null){
+                        plantios.add(plantio);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Erro ao buscar dados", error.toException());
+            }
+        });
+    }
+
+    public String carregaUsuario(){
+        FirebaseAuth userAuth = ConfigFirebase.getFirebaseAuth();
+        String uuiUser = Base64Custom.encodeBase64(userAuth.getCurrentUser().getEmail());
+        return uuiUser;
     }
 
     @Override

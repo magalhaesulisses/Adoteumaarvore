@@ -1,26 +1,27 @@
 package com.example.tccadoteumaarvore.activity.ui.newplant;
 
+
+import android.content.Context;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.example.tccadoteumaarvore.config.ConfigFirebase;
 import com.example.tccadoteumaarvore.databinding.FragmentNewplantBinding;
 import com.example.tccadoteumaarvore.model.Arvore;
-import com.example.tccadoteumaarvore.model.Imagem;
+import com.example.tccadoteumaarvore.model.Plantio;
 import com.example.tccadoteumaarvore.model.Usuario;
 import com.example.tccadoteumaarvore.utils.Base64Custom;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,10 +36,12 @@ public class NewPlantFragment extends Fragment {
     private DatabaseReference reference = ConfigFirebase.getFirebaseRef();
     private Spinner listaEspecies;
     private ArrayList<String> especies;
-    private String especie;
-    private String apelido;
-    private String sobre;
+    private Plantio plantio;
     private ArrayAdapter<String> adapter;
+    private LocationManager locMngr;
+    private EditText apelido, sobre;
+    private Usuario usuarioDoacao;
+    private double posLatitude, posLongitude;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -50,22 +53,78 @@ public class NewPlantFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        listaEspecies = binding.spinnerEspecies;
+        listaEspecies   = binding.spinnerEspecies;
+        apelido         = binding.txtNewPlantApelido;
+        sobre           = binding.txtNewPlantSobre;
+
         especies = new ArrayList<>();
-        adapter = new ArrayAdapter<>(getContext(),
-                android.R.layout.simple_spinner_dropdown_item, especies);
+        adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item, especies);
         listaEspecies.setAdapter(adapter);
 
-        //Listener Botão OK
-        binding.nSbtnAdd.setOnClickListener(new View.OnClickListener() {
+        //Recuperar posição atual
+        locMngr = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+
+        binding.btnNewPlantAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                especie = (String) listaEspecies.getSelectedItem();
-                apelido = String.valueOf(binding.nStxtApelido.getText());
-                sobre = String.valueOf(binding.nSedtMutiple.getText());
+
+                requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                        2000,
+                        10,
+                        locationListenerGPS);
+
+                plantio = new Plantio();
+                String especie = (String) listaEspecies.getSelectedItem();
+                String strApelido = apelido.getText().toString();
+                String strSobre = sobre.getText().toString();
+                String strUui = strApelido + "_" + especie;
+                plantio.setEspecie(especie);
+                plantio.setApelido(strApelido);
+                plantio.setSobre(strSobre);
+
+                //plantio.setPosLatitude(posLatitude);
+                plantio.setPosLatitude(-24.733750);
+                //plantio.setPosLongitude(posLongitude);
+                plantio.setPosLongitude(-53.753971);
+                plantio.setUui(strUui);
+                plantio.setUuiUser(carregaUsuario());
+                plantio.salvarPlantio();
             }
         });
         carregarEspecies();
+    }
+    @RequiresPermission(anyOf = {"android. permission. ACCESS_COARSE_LOCATION","android. permission. ACCESS_FINE_LOCATION"})
+    public void requestLocationUpdates(String provider, long minTimeMs, float minDistanceM, android. location. LocationListener listener){}
+
+    //Posição Original
+    LocationListener locationListenerGPS = new LocationListener() {
+        @Override
+        public void onLocationChanged(android.location.Location location) {
+            double latitude     = location.getLatitude();
+            double longitude    = location.getLongitude();
+            posLatitude         = latitude;
+            posLongitude        = longitude;
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+    @Override
+    public void onResume(){
+        super.onResume();
     }
 
     public void carregarEspecies(){
@@ -88,6 +147,12 @@ public class NewPlantFragment extends Fragment {
                 Log.e("Firebase", "Erro ao buscar dados", error.toException());
             }
         });
+    }
+
+    public String carregaUsuario(){
+        FirebaseAuth userAuth = ConfigFirebase.getFirebaseAuth();
+        String uuiUser = Base64Custom.encodeBase64(userAuth.getCurrentUser().getEmail());
+        return uuiUser;
     }
 
     @Override

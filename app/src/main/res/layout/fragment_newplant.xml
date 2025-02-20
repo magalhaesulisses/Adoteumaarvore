@@ -25,7 +25,7 @@
         android:scrollbarSize="4dp" />
 
     <EditText
-        android:id="@+id/nStxtApelido"
+        android:id="@+id/txtNewPlantApelido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
@@ -35,7 +35,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/nSedtMutiple"
+        android:id="@+id/txtNewPlantSobre"
         android:layout_width="match_parent"
         android:layout_height="222dp"
         android:layout_margin="5dp"
@@ -47,21 +47,12 @@
         android:textSize="20sp" />
 
     <Button
-        android:id="@+id/nSbtnAdd"
+        android:id="@+id/btnNewPlantAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:backgroundTint="@color/darkBrown"
         android:text="@string/newPlant_OK" />
-
-    <Button
-        android:id="@+id/nSbtnBack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:backgroundTint="@color/midBrown"
-        android:text="@string/newPlant_Back" />
 
 </LinearLayout>

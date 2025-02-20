@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.tccadoteumaarvore"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.tccadoteumaarvore"
@@ -66,6 +66,8 @@ dependencies {
 
     //Mapas
     implementation("org.osmdroid:osmdroid-android:6.1.20")
+    implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.preference:preference:1.2.1");
 
 
 
