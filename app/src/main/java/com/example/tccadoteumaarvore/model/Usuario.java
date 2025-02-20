@@ -15,6 +15,7 @@ public class Usuario implements Serializable {
     private String email;
     private String fone;
     private String senha;
+    private String imageuri;
 
     public Usuario() {
     }
@@ -22,6 +23,14 @@ public class Usuario implements Serializable {
     public void salvarUsuario(){
         DatabaseReference reference = ConfigFirebase.getFirebaseRef();
         reference.child("usuarios").child(this.uui).setValue(this);
+    }
+
+    public String getImageuri() {
+        return imageuri;
+    }
+
+    public void setImageuri(String imageuri) {
+        this.imageuri = imageuri;
     }
 
     public String getUui() {

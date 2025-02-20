@@ -1,17 +1,23 @@
 package com.example.tccadoteumaarvore.activity.ui.profile;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -21,8 +27,6 @@ import com.example.tccadoteumaarvore.databinding.FragmentProfileBinding;
 import com.example.tccadoteumaarvore.model.Plantio;
 import com.example.tccadoteumaarvore.model.Usuario;
 import com.example.tccadoteumaarvore.utils.Base64Custom;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -42,6 +46,8 @@ import org.osmdroid.views.overlay.OverlayItem;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
@@ -49,9 +55,10 @@ public class ProfileFragment extends Fragment {
     private ArrayList<Plantio> plantios = new ArrayList<>();
     private Plantio plantio;
     private Usuario user;
-    IMapController mapController;
-
+    private Uri mSelectedUri;
+    private ImageView image;
     //Maps
+    IMapController mapController;
     MapView mapa;
     LocationManager locMngr;
     ArrayList<Marker> marcas;
@@ -71,16 +78,15 @@ public class ProfileFragment extends Fragment {
 
         Context ctx = getContext();
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
-
+        image = binding.profileImage;
         mapa = (MapView) binding.mapa;
         mapa.setTileSource(TileSourceFactory.MAPNIK);
-        //mapa.setZoomLevel(16.0);
-        //mapa.setInitCenter(centroToledo);
         IMapController mapController = mapa.getController();
         mapController.setZoom(17.0);
         mapController.setCenter(centroToledo);
 
         ArrayList<OverlayItem> marcas = new ArrayList<>();
+
         //Marcando no mapa os Plantios Realizados
         if (plantios != null){
             for (Plantio p : plantios){
@@ -101,6 +107,18 @@ public class ProfileFragment extends Fragment {
             });
             mOverlay.setFocusItemsOnTap(true);
             mapa.getOverlays().add(mOverlay);
+
+            //Marker nova = new Marker(mapa);
+            //GeoPoint geoPoint = new GeoPoint(p.getPosLatitude(), p.getPosLongitude(), 0);
+            //nova.setPosition(geoPoint);
+            //nova.setTitle(p.getApelido());
+            //mapa.getOverlays().add(nova);
+
+            binding.profileImage.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(Intent.createChooser(intent, "Selecione uma foto"), 0);
+            });
+
         }
 
         // Localização
@@ -121,29 +139,44 @@ public class ProfileFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK){
+            if (requestCode == 0){
+                mSelectedUri = data.getData();
+                image.setImageURI(mSelectedUri);
+                salvarImagem(String.valueOf(mSelectedUri));
+            }
+        }
+    }
 
     public void returnUserInfo(){
 
         FirebaseAuth userAuth = ConfigFirebase.getFirebaseAuth();
         String uuiUser = Base64Custom.encodeBase64(userAuth.getCurrentUser().getEmail());
-        DatabaseReference databaseref = ConfigFirebase.getFirebaseRef();
 
-        databaseref.child("usuarios").child(uuiUser).get().addOnCompleteListener(
-            new OnCompleteListener<DataSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DataSnapshot> task) {
-                    if (task.isSuccessful()){
-                        if (task.getResult().exists()) {
-                            DataSnapshot dataSnapshot = task.getResult();
-                            user = dataSnapshot.getValue(Usuario.class);
-                            String nomeCompleto = user.getNome() + " " + user.getSobrenome();
-                            binding.profileName.setText(nomeCompleto);
-                            binding.profileLogin.setText(user.getLogin());
-                        }
-                    }
+        DatabaseReference referenceUser = reference.child("usuarios").child(uuiUser);
+        referenceUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = snapshot.getValue(Usuario.class);
+                String nomeCompleto = user.getNome() + " " + user.getSobrenome();
+                binding.profileName.setText(nomeCompleto);
+                binding.profileLogin.setText(user.getLogin());
+
+                //TODO:Verificar Salvamento!
+                Uri mSelectedUri;
+                if (user.getImageuri() != ""){
+                    mSelectedUri = Uri.parse(user.getImageuri());
+                    binding.profileImage.setImageURI((mSelectedUri));
                 }
             }
-        );
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Erro ao buscar dados", error.toException());
+            }
+        });
     }
 
     public void returnPlantiosUsuario(){
@@ -156,10 +189,27 @@ public class ProfileFragment extends Fragment {
                 plantio = new Plantio();
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
                     plantio = postSnapshot.getValue(Plantio.class);
-                    if(plantio !=null){
+                    if(plantio != null){
                         plantios.add(plantio);
                     }
                 }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Firebase", "Erro ao buscar dados", error.toException());
+            }
+        });
+    }
+
+    public void salvarImagem(String uri){
+        Map<String, Object> image = new HashMap<>();
+        image.put("uri", uri);
+        DatabaseReference reference = ConfigFirebase.getFirebaseRef();
+        reference.child("usuarios").child(carregaUsuario()).setValue(image);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.e("Firebase", "Gravado com sucesso!");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
