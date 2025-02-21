@@ -64,6 +64,7 @@ public class ProfileFragment extends Fragment {
     ArrayList<Marker> marcas;
     GeoPoint centroToledo = new GeoPoint(-24.7248, -53.7362);
 
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
@@ -85,41 +86,10 @@ public class ProfileFragment extends Fragment {
         mapController.setZoom(17.0);
         mapController.setCenter(centroToledo);
 
-        ArrayList<OverlayItem> marcas = new ArrayList<>();
-
-        //Marcando no mapa os Plantios Realizados
-        if (plantios != null){
-            for (Plantio p : plantios){
-                OverlayItem overlayItem = new OverlayItem(p.getApelido(), p.getSobre(), new GeoPoint(p.getPosLatitude(), p.getPosLongitude()));
-                Drawable m = overlayItem.getMarker(0);
-                marcas.add(overlayItem);
-            }
-            ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getContext(), marcas, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                @Override
-                public boolean onItemSingleTapUp(int index, OverlayItem item) {
-                    return true;
-                }
-
-                @Override
-                public boolean onItemLongPress(int index, OverlayItem item) {
-                    return false;
-                }
-            });
-            mOverlay.setFocusItemsOnTap(true);
-            mapa.getOverlays().add(mOverlay);
-
-            //Marker nova = new Marker(mapa);
-            //GeoPoint geoPoint = new GeoPoint(p.getPosLatitude(), p.getPosLongitude(), 0);
-            //nova.setPosition(geoPoint);
-            //nova.setTitle(p.getApelido());
-            //mapa.getOverlays().add(nova);
-
-            binding.profileImage.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                startActivityForResult(Intent.createChooser(intent, "Selecione uma foto"), 0);
-            });
-
-        }
+        binding.profileImage.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+            startActivityForResult(Intent.createChooser(intent, "Selecione uma foto"), 0);
+        });
 
         // Localização
         locMngr = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
@@ -164,10 +134,9 @@ public class ProfileFragment extends Fragment {
                 String nomeCompleto = user.getNome() + " " + user.getSobrenome();
                 binding.profileName.setText(nomeCompleto);
                 binding.profileLogin.setText(user.getLogin());
-
-                //TODO:Verificar Salvamento!
-                Uri mSelectedUri;
-                if (user.getImageuri() != ""){
+                String uri = user.getImageuri();
+                if ((!uri.isEmpty()) && (!uri.equals(""))){
+                    Uri mSelectedUri;
                     mSelectedUri = Uri.parse(user.getImageuri());
                     binding.profileImage.setImageURI((mSelectedUri));
                 }
@@ -193,6 +162,29 @@ public class ProfileFragment extends Fragment {
                         plantios.add(plantio);
                     }
                 }
+
+                //Marcando no mapa os Plantios Realizados
+                ArrayList<OverlayItem> marcas = new ArrayList<>();
+                if (plantios != null){
+                    for (Plantio p : plantios){
+                        OverlayItem overlayItem = new OverlayItem(p.getApelido(), p.getSobre(), new GeoPoint(p.getPosLatitude(), p.getPosLongitude()));
+                        Drawable m = overlayItem.getMarker(0);
+                        marcas.add(overlayItem);
+                    }
+                    ItemizedOverlayWithFocus<OverlayItem> mOverlay = new ItemizedOverlayWithFocus<>(getContext(), marcas, new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
+                        @Override
+                        public boolean onItemSingleTapUp(int index, OverlayItem item) {
+                            return true;
+                        }
+
+                        @Override
+                        public boolean onItemLongPress(int index, OverlayItem item) {
+                            return false;
+                        }
+                    });
+                    mOverlay.setFocusItemsOnTap(true);
+                    mapa.getOverlays().add(mOverlay);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -202,10 +194,8 @@ public class ProfileFragment extends Fragment {
     }
 
     public void salvarImagem(String uri){
-        Map<String, Object> image = new HashMap<>();
-        image.put("uri", uri);
         DatabaseReference reference = ConfigFirebase.getFirebaseRef();
-        reference.child("usuarios").child(carregaUsuario()).setValue(image);
+        reference.child("usuarios").child(carregaUsuario()).child("imageuri").setValue(uri);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

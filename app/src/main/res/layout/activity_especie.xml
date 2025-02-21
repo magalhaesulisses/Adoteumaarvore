@@ -15,8 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lagerstroemia Indica"
-        android:textAlignment="center"
-        android:textSize="34sp" />
+        android:textAlignment="viewStart"
+        android:textSize="34sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/especiePopular"

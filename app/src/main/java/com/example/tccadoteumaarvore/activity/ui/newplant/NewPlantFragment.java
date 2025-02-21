@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
@@ -63,16 +65,14 @@ public class NewPlantFragment extends Fragment {
 
         //Recuperar posição atual
         locMngr = (LocationManager) getContext().getSystemService(Context.LOCATION_SERVICE);
+        locMngr.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                2000,
+                10,
+                locationListenerGPS);
 
         binding.btnNewPlantAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                        2000,
-                        10,
-                        locationListenerGPS);
-
                 plantio = new Plantio();
                 String especie = (String) listaEspecies.getSelectedItem();
                 String strApelido = apelido.getText().toString();
@@ -81,14 +81,14 @@ public class NewPlantFragment extends Fragment {
                 plantio.setEspecie(especie);
                 plantio.setApelido(strApelido);
                 plantio.setSobre(strSobre);
-
-                //plantio.setPosLatitude(posLatitude);
-                plantio.setPosLatitude(-24.733750);
-                //plantio.setPosLongitude(posLongitude);
-                plantio.setPosLongitude(-53.753971);
+                plantio.setPosLatitude(posLatitude);
+                plantio.setPosLongitude(posLongitude);
                 plantio.setUui(strUui);
                 plantio.setUuiUser(carregaUsuario());
                 plantio.salvarPlantio();
+
+                Toast.makeText(getContext(), "Plantio registrado com sucesso!", Toast.LENGTH_SHORT).show();
+                limparPlantio();
             }
         });
         carregarEspecies();
@@ -153,6 +153,11 @@ public class NewPlantFragment extends Fragment {
         FirebaseAuth userAuth = ConfigFirebase.getFirebaseAuth();
         String uuiUser = Base64Custom.encodeBase64(userAuth.getCurrentUser().getEmail());
         return uuiUser;
+    }
+
+    public void limparPlantio(){
+        binding.txtNewPlantApelido.setText("");
+        binding.txtNewPlantSobre.setText("");
     }
 
     @Override

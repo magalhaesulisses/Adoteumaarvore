@@ -127,6 +127,7 @@ public class RegisterActivity extends AppCompatActivity {
                 user.setSenha(edtSenhaReg.getText().toString());
                 //Uses e-mail to generate uui
                 user.setUui(Base64Custom.encodeBase64(user.getEmail()));
+                user.setImageuri("");
 
                 auth.createUserWithEmailAndPassword(user.getEmail(), user.getSenha()).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
